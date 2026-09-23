@@ -1,0 +1,41 @@
+<template>
+
+    <div>
+        <p>Testing something in the UI</p>
+    </div>
+
+    <lightning-card>
+
+        <template lwc:if={isLoading}>
+            <lightning-spinner></lightning-spinner>
+        </template>
+
+        <template lwc:elseif={error}>
+            <p>something went wrong</p>
+        </template>
+
+        <template lwc:else>
+            <ul>
+                <template for:each={opportunities} for:item="opportunity">
+                    <div key={opportunity.Id} class="slds-box slds-m-vertical_x-small">
+                        <h2>{opportunity.Name}</h2>
+                        <p>Amount: {opportunity.Amount}</p>
+                        <p>Probability: {opportunity.Probability}</p>
+                        <p>Expected Rev Overriden : {opportunity.Expected_Revenue_Overridden__c}</p>
+                        <hr></hr>
+
+                        <lightning-button
+                            label="Set Expected Revenue" 
+                            variant="variant_type" 
+                            data-id={opportunity.Id}
+                            onclick={handleSetExpectedRevenue}
+                        >
+                        </lightning-button>
+                    </div>
+                </template>
+            </ul>
+        </template>
+
+    </lightning-card>
+    
+</template>
